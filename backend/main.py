@@ -132,8 +132,13 @@ def geocode_place(q: str = Query(..., min_length=2, description="Place or city n
 # -----------------------------------------------------------------------------
 # Static Mounts (ADR, Reports, Frontend)
 # -----------------------------------------------------------------------------
+from fastapi.responses import RedirectResponse
+
 adr_dir = BASE_DIR / "adr"
 if adr_dir.exists():
+    @app.get("/adr")
+    def redirect_adr():
+        return RedirectResponse(url="/adr/")
     app.mount("/adr", StaticFiles(directory=str(adr_dir), html=True), name="adr")
 
 reports_dir = BASE_DIR / "reports"
