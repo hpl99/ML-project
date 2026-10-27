@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T06:59:31.624634Z",
+  "generated_at": "2026-10-27T07:29:26.025362Z",
   "model": "TunedRandomForest",
   "roc_auc": 0.9115,
   "pr_auc": 0.6705,

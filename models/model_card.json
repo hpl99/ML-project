@@ -1,7 +1,7 @@
 {
   "model_name": "URsafe Terrain Hazard Model (TunedRandomForest)",
   "model_version": "v0.1.0",
-  "trained_at": "2026-10-27T06:59:31.623349Z",
+  "trained_at": "2026-10-27T07:29:26.024206Z",
   "framework": "scikit-learn 1.9.1 / Python 3.13",
   "problem_framing": "Relative Hazard Risk Score (0-100), not an absolute probability (ADR 0001)",
   "features_used": [

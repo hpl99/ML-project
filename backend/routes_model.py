@@ -17,6 +17,7 @@ router = APIRouter(prefix="/api", tags=["Model"])
 
 
 @router.get("/model/report")
+@router.get("/model/summary")
 def get_model_report() -> Dict[str, Any]:
     """Retrieve complete Model Card, cross-validation benchmarks, and cluster data."""
     card_path = MODELS_DIR / "model_card.json"

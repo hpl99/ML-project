@@ -387,9 +387,13 @@ def fetch_soil_wetness(lat: float, lon: float, date_str: str) -> Tuple[float, fl
         except Exception:
             pass
 
-    # Query NASA POWER
+    # Query NASA POWER (Latency check: POWER data is archived and unavailable for recent/current dates)
     try:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
+        # NASA POWER data has a 60-90 day latency; return immediate derived baseline for recent dates
+        if (datetime.utcnow() - dt).days < 60:
+            return 0.40, 0.42, "derived"
+
         start_str = (dt - timedelta(days=7)).strftime("%Y%m%d")
         end_str = dt.strftime("%Y%m%d")
 

@@ -4,9 +4,15 @@ Serves the REST API endpoints and mounts static assets for the frontend
 and architectural decision records (/adr).
 """
 import logging
-from datetime import datetime
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List
+
+# Ensure project root is available in sys.path
+root_dir = Path(__file__).resolve().parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
 
 import requests
 from fastapi import FastAPI, Query, HTTPException
@@ -67,7 +73,7 @@ def health_check() -> Dict[str, Any]:
         "service": "URsafe Hazard Prediction Engine",
         "model_version": "v0.1.0",
         "model_trained_at": trained_at or "Training in progress / Cached",
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "upstream_data_freshness": "Real-time satellite & meteorological reanalysis"
     }
 
@@ -148,3 +154,14 @@ if reports_dir.exists():
 frontend_dir = BASE_DIR / "frontend"
 if frontend_dir.exists():
     app.mount("/", StaticFiles(directory=str(frontend_dir), html=True), name="frontend")
+
+
+if __name__ == "__main__":
+    import uvicorn
+    print("=" * 70)
+    print("  URsafe: Starting Server via backend.main")
+    print("  Web Interface:      http://127.0.0.1:8000")
+    print("  API Documentation:  http://127.0.0.1:8000/docs")
+    print("=" * 70)
+    uvicorn.run("backend.main:app", host="127.0.0.1", port=8000, reload=False)
+

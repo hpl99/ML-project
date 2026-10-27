@@ -30,7 +30,7 @@ def get_live_features(lat: float, lon: float, date_str: Optional[str] = None) ->
     - rainfall_chart: List of 33 daily items with 'date', 'rainfall_mm', 'type'
     - provenance_tags: Dict mapping feature name to provenance ('observed' | 'forecast' | 'derived' | 'missing')
     """
-    cache_key = f"live_{round(lat, 4)}_{round(lon, 4)}_{date_str or 'current'}"
+    cache_key = f"live_{round(lat, 2)}_{round(lon, 2)}_{date_str or 'current'}"
     cached = cache.get(cache_key)
     if cached:
         return cached["features"], cached["chart"], cached["provenance"]

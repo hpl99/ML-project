@@ -278,6 +278,7 @@ async function executeRouteComparison() {
     loading.style.display = 'none';
     btn.disabled = false;
     console.error('Error calculating routes:', err);
+    cardsList.innerHTML = '<div class="error-msg" style="color: var(--accent-orange); padding: 14px; background: rgba(224, 90, 43, 0.1); border: 1px solid rgba(224, 90, 43, 0.25); border-radius: 8px; font-size: 13px;">Route calculation temporarily unavailable. Please verify the server is running and retry.</div>';
   }
 }
 

@@ -6,6 +6,7 @@ and optimizes across Fast, Balanced, and Safer route choices (ADR 0010).
 """
 import logging
 import math
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, Any, List, Tuple
 
 import joblib
@@ -92,21 +93,31 @@ def evaluate_route_risk(route_data: dict, profile: str = "hiker") -> Dict[str, A
     duration_min = round(route_data.get("duration", 0.0) / 60.0, 1)
     distance_km = round(route_data.get("distance", 0.0) / 1000.0, 1)
 
-    sampled_points = sample_route_coordinates(coords, max_samples=25)
+    sampled_points = sample_route_coordinates(coords, max_samples=10)
     model = load_model_for_routing()
 
     segment_scores = []
     segments_geojson = []
 
+    midpoints = []
     for idx in range(len(sampled_points) - 1):
         lat1, lon1, orig_idx1 = sampled_points[idx]
         lat2, lon2, orig_idx2 = sampled_points[idx + 1]
+        mid_lat = round((lat1 + lat2) / 2.0, 3)
+        mid_lon = round((lon1 + lon2) / 2.0, 3)
+        midpoints.append((idx, mid_lat, mid_lon, orig_idx1, orig_idx2, lon1, lat1, lon2, lat2))
 
-        # Evaluate risk at midpoint of this segment
-        mid_lat = (lat1 + lat2) / 2.0
-        mid_lon = (lon1 + lon2) / 2.0
+    def fetch_item(item):
+        idx, mlat, mlon, o1, o2, lo1, la1, lo2, la2 = item
+        feats, _, _ = get_live_features(mlat, mlon)
+        return idx, feats
 
-        features, _, _ = get_live_features(mid_lat, mid_lon)
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        feats_map = dict(executor.map(fetch_item, midpoints))
+
+    for item in midpoints:
+        idx, mid_lat, mid_lon, orig_idx1, orig_idx2, lon1, lat1, lon2, lat2 = item
+        features = feats_map.get(idx, {})
 
         # Predict risk probability
         if model is not None:
@@ -170,6 +181,11 @@ def evaluate_route_risk(route_data: dict, profile: str = "hiker") -> Dict[str, A
 
 def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: float, profile: str = "hiker") -> Dict[str, Any]:
     """Execute multi-criteria evaluation of all OSRM route options."""
+    cache_key = f"route_{round(start_lat, 3)}_{round(start_lon, 3)}_{round(end_lat, 3)}_{round(end_lon, 3)}_{profile}"
+    cached = cache.get(cache_key)
+    if cached:
+        return cached
+
     osrm_routes = query_osrm_routes(start_lon, start_lat, end_lon, end_lat)
     if not osrm_routes:
         return {"status": "error", "message": "No navigable routes found between coordinates."}
@@ -241,10 +257,12 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
         }
     ]
 
-    return {
+    out = {
         "status": "success",
         "routes_count": len(routes_out),
         "osrm_options_returned": len(osrm_routes),
         "note": "Routing powered by OSRM driving engine. Cumulative risk metric assumes segment hazard independence.",
         "routes": routes_out
     }
+    cache.set(cache_key, out, ttl_sec=3600)
+    return out
