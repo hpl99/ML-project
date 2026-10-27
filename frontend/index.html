@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URsafe &reg; &mdash; Terrain Hazard Prediction & AI Navigation Companion</title>
+  <meta name="description" content="URsafe reads terrain, rainfall and soil from real satellite and weather data, providing relative hazard risk estimates and AI companion guidance.">
+
+  <!-- Google Fonts: Instrument Serif & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Application Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar (Section 7.2) -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="nav-brand-col">
+        <a href="#" class="nav-brand">URsafe<sup>&reg;</sup></a>
+      </div>
+      <nav class="nav-links-col">
+        <ul class="nav-links">
+          <li><a href="#predict">Predict</a></li>
+          <li><a href="#route">Route</a></li>
+          <li><a href="#model">Model</a></li>
+          <li><a href="#method">Method</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta-col">
+        <a href="#predict" class="btn-pill btn-pill-small">Open the map</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Section 7.3) -->
+  <section class="hero-section" id="hero">
+    <video autoplay muted loop playsinline class="hero-video-bg" poster="assets/hero_fallback.jpg">
+      <source src="https://designerstephen.github.io/public-assets/videos/serene-art-hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="animate-h1">Know the <em>land</em> before you <em>go.</em></h1>
+      <p class="hero-subtext animate-sub">
+        URsafe reads terrain, rainfall and soil from real satellite and weather data, then tells you how risky the ground ahead is, why, and where a safer route runs. Explore Smarter. Travel Safer.
+      </p>
+      <div class="hero-action animate-cta">
+        <a href="#route" class="btn-pill btn-pill-hero">Predict my route</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: #predict (Section 7.4.1) -->
+  <section class="app-section" id="predict">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Predict terrain risk</h2>
+        <p class="section-subheading">Click anywhere on the map or search a destination to evaluate slope stability, hydrometeorological saturation, and receive AI Companion guidance.</p>
+      </div>
+
+      <div class="predict-grid">
+        <!-- Interactive Map Column -->
+        <div class="map-container-wrapper">
+          <div class="map-search-bar">
+            <div class="search-input-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="predict-search-input" placeholder="Search city or mountain pass (e.g. Dehradun, Wayanad)..." autocomplete="off">
+            </div>
+            <ul id="predict-search-results" class="search-results-dropdown"></ul>
+          </div>
+          <div id="predict-map" class="leaflet-map"></div>
+        </div>
+
+        <!-- Controls & Results Side Panel -->
+        <div class="predict-panel card-panel">
+          <div class="controls-block">
+            <div class="block-title">Traveler Persona</div>
+            <div class="profile-chips" id="predict-profile-chips">
+              <button class="chip-btn active" data-profile="hiker">Hiker (1.0x)</button>
+              <button class="chip-btn" data-profile="rider">Rider (1.0x)</button>
+              <button class="chip-btn" data-profile="family">Family (1.2x)</button>
+              <button class="chip-btn" data-profile="elderly">Elderly (1.25x)</button>
+            </div>
+          </div>
+
+          <div class="controls-block">
+            <div class="block-title">Replay Real Held-Out Event</div>
+            <select id="replay-events-select" class="dropdown-select">
+              <option value="">Select a historical landslide to replay...</option>
+            </select>
+          </div>
+
+          <div class="controls-block">
+            <div class="block-title">Observation Date</div>
+            <input type="date" id="predict-date-input" class="date-input">
+          </div>
+
+          <div id="predict-results-container">
+            <div class="empty-state" id="predict-empty-state">
+              <p>Click on the map or select a past event to generate a real-time hazard evaluation.</p>
+            </div>
+
+            <div id="predict-card" style="display: none;">
+              <!-- Score Box -->
+              <div class="score-hero-box">
+                <div>
+                  <div class="score-display-wrap">
+                    <span id="res-score" class="score-number">--</span>
+                    <span class="score-max">/ 100</span>
+                  </div>
+                  <div style="font-size: 11px; text-transform: uppercase; color: var(--color-muted-text); margin-top: 4px;">
+                    Model Estimate &bull; <span id="res-confidence">High</span> Confidence
+                  </div>
+                </div>
+                <div>
+                  <span id="res-band-badge" class="band-pill-badge band-Green">Low Risk</span>
+                </div>
+              </div>
+
+              <!-- AI Companion Advisory -->
+              <div class="companion-box">
+                <div class="companion-header">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                  <span>AI Companion Guidance</span>
+                </div>
+                <div id="res-companion-text" class="companion-text"></div>
+              </div>
+
+              <!-- Terrain Zone -->
+              <div class="controls-block">
+                <div class="block-title">Terrain Morphology Zone</div>
+                <div id="res-zone-name" style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">--</div>
+                <div id="res-zone-memberships" style="display: flex; gap: 6px; font-size: 11px; color: var(--color-muted-text);"></div>
+              </div>
+
+              <!-- Top Physical Drivers (SHAP) -->
+              <div class="controls-block">
+                <div class="block-title">Key Physical Factors (SHAP Drivers)</div>
+                <ul id="res-factors-list" class="factors-list"></ul>
+              </div>
+
+              <!-- Rainfall Chart -->
+              <div class="controls-block">
+                <div class="block-title">30-Day Rainfall & 3-Day Forecast</div>
+                <div style="height: 140px; position: relative;">
+                  <canvas id="predict-rainfall-chart"></canvas>
+                </div>
+              </div>
+
+              <!-- Freshness & Disclaimer -->
+              <div style="font-size: 11px; color: var(--color-muted-text); line-height: 1.5; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--color-border-subtle);">
+                <div>Freshness: <span id="res-freshness">Live reanalysis</span></div>
+                <div style="margin-top: 4px;"><em>Disclaimer: Relative model estimates. Not official advice. Consult GSI, NDMA, and IMD.</em></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: #route (Section 7.4.2) -->
+  <section class="app-section" id="route">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Compare routes</h2>
+        <p class="section-subheading">Analyze multiple driving routes between points. URsafe evaluates terrain hazard along every 2 km segment, helping you choose between speed and safety.</p>
+      </div>
+
+      <div class="route-grid">
+        <!-- Route Map Column -->
+        <div class="map-container-wrapper">
+          <div id="route-map" class="leaflet-map"></div>
+        </div>
+
+        <!-- Route Controls and Cards Panel -->
+        <div class="route-panel card-panel">
+          <div class="controls-block">
+            <div class="block-title">Select Route Endpoints</div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input type="text" id="route-start-input" class="date-input" placeholder="Origin (Click map or type city)..." value="Rishikesh">
+              <input type="text" id="route-end-input" class="date-input" placeholder="Destination (Click map or type city)..." value="Joshimath">
+            </div>
+          </div>
+
+          <div class="controls-block">
+            <div class="block-title">Traveler Profile</div>
+            <div class="profile-chips" id="route-profile-chips">
+              <button class="chip-btn active" data-profile="hiker">Hiker</button>
+              <button class="chip-btn" data-profile="rider">Rider</button>
+              <button class="chip-btn" data-profile="family">Family</button>
+              <button class="chip-btn" data-profile="elderly">Elderly</button>
+            </div>
+          </div>
+
+          <button id="btn-compare-routes" class="btn-pill" style="width: 100%; padding: 14px 20px;">
+            <span>Compare Routes</span>
+          </button>
+
+          <div id="route-loading" style="display: none; text-align: center; padding: 24px;">
+            <p>Evaluating topography & weather across route waypoints...</p>
+          </div>
+
+          <div id="route-cards-list" class="route-cards-list"></div>
+          <div style="font-size: 11px; color: var(--color-muted-text); margin-top: 16px;">
+            *Routes fetched from OSRM driving engine. Cumulative risk assumes waypoint hazard independence.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: #model (Section 7.4.3) -->
+  <section class="app-section" id="model">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Model report card</h2>
+        <p class="section-subheading">Honest scientific reporting on real training datasets, spatial cross-validation benchmarks, probability calibration, and known weaknesses.</p>
+      </div>
+
+      <div class="model-dashboard-grid">
+        <!-- Dataset Summary -->
+        <div class="card-panel">
+          <h3>Dataset & Sampling Profile</h3>
+          <p style="margin-bottom: 16px;">Compiled strictly from real NASA COOLR landslide events and land-constrained pseudo-absences.</p>
+          <table class="metrics-table" id="dataset-summary-table">
+            <tbody>
+              <tr><th>Target Region</th><td id="meta-region">South Asia (lon 60-100, lat 5-38)</td></tr>
+              <tr><th>Positive Landslides</th><td id="meta-positives">--</td></tr>
+              <tr><th>Pseudo-Absences</th><td id="meta-negatives">--</td></tr>
+              <tr><th>Sampling Ratio</th><td id="meta-ratio">1 : 2</td></tr>
+              <tr><th>Temporal Span</th><td id="meta-dates">2007 to Present</td></tr>
+              <tr><th>Spatial Blocks</th><td id="meta-blocks">--</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Models Benchmark Comparison -->
+        <div class="card-panel">
+          <h3>Model Comparison (Spatial Holdout)</h3>
+          <p style="margin-bottom: 16px;">Evaluated strictly across unseen 1.0° spatial blocks with no geographic leakage.</p>
+          <div style="overflow-x: auto;">
+            <table class="metrics-table" id="models-benchmark-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>ROC-AUC</th>
+                  <th>PR-AUC</th>
+                  <th>F1</th>
+                  <th>Recall</th>
+                </tr>
+              </thead>
+              <tbody id="models-benchmark-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Feature Importances -->
+        <div class="card-panel">
+          <h3>Predictive Feature Drivers</h3>
+          <p style="margin-bottom: 16px;">Mean Decrease in Impurity across tree ensembles.</p>
+          <div style="height: 220px; position: relative;">
+            <canvas id="model-features-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Terrain Clusters PCA -->
+        <div class="card-panel">
+          <h3>Unsupervised Terrain Clusters (PCA)</h3>
+          <p style="margin-bottom: 16px;">Continuous morphometric clustering (Elbow/Silhouette) projected to 2D.</p>
+          <div style="height: 220px; position: relative;">
+            <canvas id="model-clusters-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Known Weaknesses Card -->
+        <div class="card-panel full-width-card">
+          <h3>Model Card: Known Weaknesses & Constraints</h3>
+          <ul class="weaknesses-list" id="model-weaknesses-list">
+            <li><strong>Conservative slope lower bound:</strong> 90m Copernicus DEM smooths micro-cliffs and roadside road-cuts.</li>
+            <li><strong>Atmospheric reanalysis resolution:</strong> 25km ERA5 grid can overlook localized convective cloudbursts in deep ravines.</li>
+            <li><strong>Pseudo-absence assumptions:</strong> Negative locations represent unrecorded landslide spots on land rather than proven permanent geotechnical stability.</li>
+            <li><strong>Reporting bias:</strong> Global inventory catalogues are heavily weighted toward transit highways and populated communities.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: #method (Section 7.4.4) -->
+  <section class="app-section" id="method">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Method and safety</h2>
+        <p class="section-subheading">Engineering architecture, data provenance, and public safety commitment.</p>
+      </div>
+
+      <div class="card-panel">
+        <h3 style="margin-bottom: 12px;">Relative Hazard Scoring Methodology</h3>
+        <p style="margin-bottom: 16px;">
+          URsafe formulates slope hazard as a <strong>Relative Risk Score (0 to 100)</strong> rather than an absolute event probability. Because historical landslide inventories contain reporting biases and negatives are sampled pseudo-absences on land, the output indicates localized comparative vulnerability relative to regional norms.
+        </p>
+
+        <h3 style="margin-bottom: 12px;">Real Scientific Data Sources</h3>
+        <p style="margin-bottom: 16px;">
+          URsafe operates entirely on open, authoritative scientific data without synthetic fillers:
+        </p>
+        <ul style="padding-left: 20px; margin-bottom: 24px; color: var(--color-muted-text); font-size: 15px;">
+          <li><strong>NASA COOLR / Global Landslide Catalog:</strong> Real historical landslide events verified from 2007 onward.</li>
+          <li><strong>Copernicus DEM (GLO-90):</strong> 90-meter digital elevation model via Open-Meteo for Horn's slope, aspect, and curvature.</li>
+          <li><strong>ECMWF ERA5 & Forecast:</strong> Daily reanalysis and forecast precipitation series for multi-day accumulation windows.</li>
+          <li><strong>NASA POWER:</strong> Surface and root-zone soil wetness parameters.</li>
+          <li><strong>Natural Earth Physical:</strong> High-resolution 1:10m river and lake centerlines.</li>
+        </ul>
+
+        <div style="display: flex; gap: 16px; align-items: center; margin-top: 16px;">
+          <a href="/adr" class="btn-pill btn-pill-small" target="_blank">View Architecture Decision Records (/adr)</a>
+          <a href="/api/datasets" class="btn-pill btn-pill-small btn-pill-secondary" target="_blank">View Dataset Manifest JSON</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>Model-based estimates only. Not a substitute for official warnings or local judgment.</p>
+    <div class="official-links">
+      <a href="https://www.gsi.gov.in" target="_blank" rel="noopener">Geological Survey of India (GSI)</a>
+      <a href="https://ndma.gov.in" target="_blank" rel="noopener">National Disaster Management Authority (NDMA)</a>
+      <a href="https://mausam.imd.gov.in" target="_blank" rel="noopener">India Meteorological Department (IMD)</a>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS & App Script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
