@@ -1,0 +1,98 @@
+[
+  {
+    "event_id": "glc_004081",
+    "date": "2012-06-06",
+    "latitude": 29.2409,
+    "longitude": 95.9761,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2012-06-06 (South Asia)"
+  },
+  {
+    "event_id": "glc_000713",
+    "date": "2008-09-19",
+    "latitude": 30.56,
+    "longitude": 77.3,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2008-09-19 (South Asia)"
+  },
+  {
+    "event_id": "glc_001735",
+    "date": "2010-05-17",
+    "latitude": 34.3951,
+    "longitude": 75.6233,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2010-05-17 (South Asia)"
+  },
+  {
+    "event_id": "glc_006497",
+    "date": "2015-07-01",
+    "latitude": 26.8352,
+    "longitude": 88.1881,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2015-07-01 (South Asia)"
+  },
+  {
+    "event_id": "glc_005038",
+    "date": "2013-09-03",
+    "latitude": 28.3922,
+    "longitude": 83.1913,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2013-09-03 (South Asia)"
+  },
+  {
+    "event_id": "glc_004639",
+    "date": "2013-06-27",
+    "latitude": 27.3765,
+    "longitude": 88.7628,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2013-06-27 (South Asia)"
+  },
+  {
+    "event_id": "glc_002877",
+    "date": "2011-02-01",
+    "latitude": 6.9554,
+    "longitude": 80.9282,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2011-02-01 (South Asia)"
+  },
+  {
+    "event_id": "glc_007564",
+    "date": "2015-09-21",
+    "latitude": 22.3496,
+    "longitude": 91.8138,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2015-09-21 (South Asia)"
+  },
+  {
+    "event_id": "glc_008346",
+    "date": "2015-12-20",
+    "latitude": 10.8319,
+    "longitude": 78.7075,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2015-12-20 (South Asia)"
+  },
+  {
+    "event_id": "glc_002055",
+    "date": "2010-08-06",
+    "latitude": 34.1114,
+    "longitude": 77.5874,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2010-08-06 (South Asia)"
+  },
+  {
+    "event_id": "glc_002464",
+    "date": "2010-10-23",
+    "latitude": 19.9166,
+    "longitude": 94.3761,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2010-10-23 (South Asia)"
+  },
+  {
+    "event_id": "glc_008453",
+    "date": "2016-06-08",
+    "latitude": 34.2952,
+    "longitude": 75.3226,
+    "region_group": "South Asia",
+    "description": "Real Landslide Event on 2016-06-08 (South Asia)"
+  }
+]

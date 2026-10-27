@@ -1,0 +1,173 @@
+{
+  "features": [
+    {
+      "feature": "elevation_m",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0855,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "slope_deg",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.2572,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "aspect_sin",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.016,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "aspect_cos",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0112,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "curvature",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0383,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "roughness",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.2743,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "relief_m",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.274,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_1d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.4513,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_3d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.508,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_7d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.5151,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_14d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.5103,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_30d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.4784,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "rain_max_day_30d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.5148,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "api_30d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.546,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "soil_wetness_top",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.4494,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "soil_wetness_root_7d",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": 0.3802,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "distance_to_water_m",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0368,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "log_dist_to_water",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.2138,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "month_sin",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0149,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "month_cos",
+      "type": "numeric",
+      "missing_rate": 0.0,
+      "correlation_with_label": -0.0006,
+      "selected": true,
+      "reason": "Meets physics checks and non-collinearity thresholds (<0.95)"
+    },
+    {
+      "feature": "region_group",
+      "type": "categorical",
+      "missing_rate": 0.0,
+      "correlation_with_label": null,
+      "selected": true,
+      "reason": "Geoclimatic separation"
+    }
+  ],
+  "generated_at": "2026-10-27T06:59:24.736016Z"
+}

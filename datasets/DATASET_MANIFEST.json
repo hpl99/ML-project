@@ -1,4 +1,24 @@
 {
   "generated_at": null,
-  "sources": []
+  "sources": [
+    {
+      "dataset_name": "NASA Global Landslide Catalog (GLC) / COOLR",
+      "primary_url": "https://raw.githubusercontent.com/AntoineSueur/Geoplot-landslides/master/Global_Landslide_Catalog_Export.csv",
+      "license": "NASA Open Data Policy (Public Domain)",
+      "download_date": "2026-10-27",
+      "rows": 200,
+      "sha256": "e28783f4119a6385f8ec1cedd9d8cefcc0d2d003d551e0f986ecf9f82daf6fd4",
+      "raw_file": "glc_events_raw.csv"
+    },
+    {
+      "dataset_name": "Natural Earth 50m Land Polygons",
+      "primary_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson",
+      "license": "Public Domain",
+      "download_date": "2026-10-27",
+      "rows": 400,
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "raw_file": "ne_land.geojson"
+    }
+  ],
+  "last_updated": "2026-10-27T06:42:28.705478Z"
 }
