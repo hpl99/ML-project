@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Large dataset downloads & caches (per rule 0 & section 2)
+datasets/raw/*
+!datasets/raw/.gitkeep
+datasets/cache/*
+!datasets/cache/.gitkeep
+datasets/interim/*
+!datasets/interim/.gitkeep
+
+# Large model artifacts (keep small ones like json / metadata)
+models/*.joblib
+!models/.gitkeep
+
+# Operating system files
+.DS_Store
+Thumbs.db
