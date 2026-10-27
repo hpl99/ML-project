@@ -1,0 +1,1397 @@
+{
+  "optimal_k": 5,
+  "silhouette_score": 0.692,
+  "pca_explained_variance": [
+    0.801,
+    0.183
+  ],
+  "centroids": [
+    {
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "x": 3.064,
+      "y": 1.229,
+      "event_rate": 0.25
+    },
+    {
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "x": -1.204,
+      "y": -0.123,
+      "event_rate": 0.262
+    },
+    {
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "x": 0.33,
+      "y": 2.406,
+      "event_rate": 0.025
+    },
+    {
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "x": 3.923,
+      "y": -0.991,
+      "event_rate": 0.689
+    },
+    {
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "x": 1.04,
+      "y": -0.567,
+      "event_rate": 0.574
+    }
+  ],
+  "sample_points": [
+    {
+      "x": -1.294,
+      "y": -0.194,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 278.0,
+      "slope": 0.3
+    },
+    {
+      "x": -0.244,
+      "y": 2.593,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4767.0,
+      "slope": 0.9
+    },
+    {
+      "x": 0.479,
+      "y": -0.895,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 163.0,
+      "slope": 14.8
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.893,
+      "y": -0.947,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 793.0,
+      "slope": 18.0
+    },
+    {
+      "x": -0.508,
+      "y": -0.392,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 389.0,
+      "slope": 1.8
+    },
+    {
+      "x": -0.979,
+      "y": -0.283,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 308.0,
+      "slope": 2.6
+    },
+    {
+      "x": -0.689,
+      "y": -0.149,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 644.0,
+      "slope": 2.2
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.244,
+      "y": -0.249,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 225.0,
+      "slope": 0.5
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.29,
+      "y": -0.259,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 188.0,
+      "slope": 0.6
+    },
+    {
+      "x": -1.27,
+      "y": -0.134,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 376.0,
+      "slope": 0.2
+    },
+    {
+      "x": 2.295,
+      "y": -1.416,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 326.0,
+      "slope": 21.4
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.183,
+      "y": 0.204,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 900.0,
+      "slope": 0.2
+    },
+    {
+      "x": 3.54,
+      "y": 0.959,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 4324.0,
+      "slope": 28.4
+    },
+    {
+      "x": 3.733,
+      "y": 1.749,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": true,
+      "elevation": 5545.0,
+      "slope": 29.1
+    },
+    {
+      "x": -0.968,
+      "y": -0.319,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 262.0,
+      "slope": 2.0
+    },
+    {
+      "x": 3.153,
+      "y": 1.354,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 4694.0,
+      "slope": 23.4
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 3.457,
+      "y": 1.655,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 5273.0,
+      "slope": 25.6
+    },
+    {
+      "x": -0.68,
+      "y": -0.181,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 603.0,
+      "slope": 4.2
+    },
+    {
+      "x": -1.248,
+      "y": -0.334,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 102.0,
+      "slope": 0.8
+    },
+    {
+      "x": 0.334,
+      "y": -0.65,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 440.0,
+      "slope": 11.6
+    },
+    {
+      "x": -1.401,
+      "y": -0.348,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 6.0,
+      "slope": 0.1
+    },
+    {
+      "x": 3.885,
+      "y": -0.657,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 2196.0,
+      "slope": 38.4
+    },
+    {
+      "x": -0.174,
+      "y": 2.777,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 5063.0,
+      "slope": 0.8
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -0.965,
+      "y": -0.346,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 227.0,
+      "slope": 0.7
+    },
+    {
+      "x": 4.817,
+      "y": -1.004,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 2167.0,
+      "slope": 40.9
+    },
+    {
+      "x": 0.993,
+      "y": -0.645,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 774.0,
+      "slope": 18.2
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.204,
+      "y": -0.01,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1784.0,
+      "slope": 8.5
+    },
+    {
+      "x": 3.294,
+      "y": -0.452,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": false,
+      "elevation": 2195.0,
+      "slope": 30.9
+    },
+    {
+      "x": -1.334,
+      "y": -0.195,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 258.0,
+      "slope": 0.3
+    },
+    {
+      "x": -1.358,
+      "y": -0.23,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 195.0,
+      "slope": 0.1
+    },
+    {
+      "x": -1.033,
+      "y": -0.096,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 548.0,
+      "slope": 2.3
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.349,
+      "y": -0.235,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 192.0,
+      "slope": 0.1
+    },
+    {
+      "x": 1.446,
+      "y": -0.384,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1372.0,
+      "slope": 9.0
+    },
+    {
+      "x": 2.348,
+      "y": 0.266,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": true,
+      "elevation": 2745.0,
+      "slope": 25.6
+    },
+    {
+      "x": 4.034,
+      "y": -0.942,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 1865.0,
+      "slope": 35.7
+    },
+    {
+      "x": -1.143,
+      "y": -0.051,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 557.0,
+      "slope": 1.2
+    },
+    {
+      "x": -1.225,
+      "y": -0.371,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 61.0,
+      "slope": 1.5
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 3.303,
+      "y": 1.06,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 4350.0,
+      "slope": 32.6
+    },
+    {
+      "x": 2.339,
+      "y": -0.972,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 979.0,
+      "slope": 26.7
+    },
+    {
+      "x": -1.295,
+      "y": -0.362,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 39.0,
+      "slope": 0.7
+    },
+    {
+      "x": -1.081,
+      "y": -0.397,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 96.0,
+      "slope": 2.1
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 0.847,
+      "y": -0.424,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 1017.0,
+      "slope": 16.4
+    },
+    {
+      "x": 1.905,
+      "y": -0.18,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1890.0,
+      "slope": 17.7
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 0.256,
+      "y": -0.599,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 474.0,
+      "slope": 5.2
+    },
+    {
+      "x": -1.106,
+      "y": -0.163,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 416.0,
+      "slope": 0.9
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 5.262,
+      "y": -1.601,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 1540.0,
+      "slope": 41.3
+    },
+    {
+      "x": -1.257,
+      "y": -0.394,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 12.0,
+      "slope": 0.8
+    },
+    {
+      "x": 1.934,
+      "y": -0.756,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1085.0,
+      "slope": 21.6
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 0.578,
+      "y": -0.685,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 512.0,
+      "slope": 12.9
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.354,
+      "y": 0.015,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 1895.0,
+      "slope": 8.3
+    },
+    {
+      "x": 0.777,
+      "y": -0.999,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 164.0,
+      "slope": 15.8
+    },
+    {
+      "x": 2.875,
+      "y": 0.468,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": true,
+      "elevation": 3294.0,
+      "slope": 28.2
+    },
+    {
+      "x": -1.082,
+      "y": -0.283,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 258.0,
+      "slope": 2.1
+    },
+    {
+      "x": -1.271,
+      "y": -0.171,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 323.0,
+      "slope": 0.6
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 0.005,
+      "y": -0.622,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 316.0,
+      "slope": 8.9
+    },
+    {
+      "x": 2.982,
+      "y": 1.87,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 5343.0,
+      "slope": 24.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.189,
+      "y": -0.329,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 139.0,
+      "slope": 1.3
+    },
+    {
+      "x": 2.786,
+      "y": -0.027,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": true,
+      "elevation": 2547.0,
+      "slope": 22.8
+    },
+    {
+      "x": 2.746,
+      "y": 0.349,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": true,
+      "elevation": 3062.0,
+      "slope": 26.1
+    },
+    {
+      "x": -1.356,
+      "y": -0.242,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 179.0,
+      "slope": 0.1
+    },
+    {
+      "x": 0.877,
+      "y": -0.831,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 452.0,
+      "slope": 11.6
+    },
+    {
+      "x": 4.512,
+      "y": 0.082,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 3560.0,
+      "slope": 42.4
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 5.779,
+      "y": 1.107,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 5649.0,
+      "slope": 42.6
+    },
+    {
+      "x": 0.476,
+      "y": -0.925,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 120.0,
+      "slope": 6.3
+    },
+    {
+      "x": 1.175,
+      "y": -0.093,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1651.0,
+      "slope": 12.8
+    },
+    {
+      "x": 0.623,
+      "y": 2.393,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4914.0,
+      "slope": 6.5
+    },
+    {
+      "x": 0.022,
+      "y": 2.457,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4706.0,
+      "slope": 3.5
+    },
+    {
+      "x": 0.994,
+      "y": -0.685,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 719.0,
+      "slope": 12.9
+    },
+    {
+      "x": -0.342,
+      "y": 2.408,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4455.0,
+      "slope": 0.5
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 3.366,
+      "y": -1.103,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": false,
+      "elevation": 1305.0,
+      "slope": 25.0
+    },
+    {
+      "x": -0.179,
+      "y": -0.761,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 27.0,
+      "slope": 6.3
+    },
+    {
+      "x": -0.389,
+      "y": -0.118,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 837.0,
+      "slope": 3.2
+    },
+    {
+      "x": 2.839,
+      "y": -1.637,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 281.0,
+      "slope": 26.9
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -0.036,
+      "y": 2.651,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4953.0,
+      "slope": 1.9
+    },
+    {
+      "x": 3.563,
+      "y": -0.843,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 1772.0,
+      "slope": 28.3
+    },
+    {
+      "x": 0.078,
+      "y": -0.006,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1228.0,
+      "slope": 11.3
+    },
+    {
+      "x": 2.105,
+      "y": -1.223,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 505.0,
+      "slope": 20.0
+    },
+    {
+      "x": 0.424,
+      "y": -0.72,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 385.0,
+      "slope": 12.2
+    },
+    {
+      "x": -1.254,
+      "y": -0.191,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 302.0,
+      "slope": 0.8
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.024,
+      "y": -0.724,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 678.0,
+      "slope": 16.9
+    },
+    {
+      "x": 0.498,
+      "y": -0.839,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 253.0,
+      "slope": 6.1
+    },
+    {
+      "x": -1.352,
+      "y": -0.184,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 263.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.132,
+      "y": -0.158,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 410.0,
+      "slope": 1.2
+    },
+    {
+      "x": 2.54,
+      "y": -1.152,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 823.0,
+      "slope": 30.9
+    },
+    {
+      "x": -1.136,
+      "y": -0.264,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 257.0,
+      "slope": 0.9
+    },
+    {
+      "x": -1.33,
+      "y": -0.372,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 8.0,
+      "slope": 0.5
+    },
+    {
+      "x": -0.558,
+      "y": -0.396,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 358.0,
+      "slope": 2.6
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -0.152,
+      "y": -0.627,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 231.0,
+      "slope": 9.7
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -0.668,
+      "y": -0.147,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 657.0,
+      "slope": 1.4
+    },
+    {
+      "x": 0.525,
+      "y": -0.669,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": false,
+      "elevation": 508.0,
+      "slope": 15.9
+    },
+    {
+      "x": 0.473,
+      "y": 0.215,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 1739.0,
+      "slope": 12.6
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.225,
+      "y": -0.355,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 83.0,
+      "slope": 1.2
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.263,
+      "y": -0.393,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 11.0,
+      "slope": 0.9
+    },
+    {
+      "x": 2.872,
+      "y": 1.484,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 4740.0,
+      "slope": 19.2
+    },
+    {
+      "x": 3.862,
+      "y": -1.891,
+      "cluster_id": 3,
+      "zone_name": "High Hazard Mountain Terrain",
+      "is_landslide": true,
+      "elevation": 431.0,
+      "slope": 21.0
+    },
+    {
+      "x": 0.085,
+      "y": 2.597,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4937.0,
+      "slope": 3.2
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -0.02,
+      "y": 2.664,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 4980.0,
+      "slope": 2.3
+    },
+    {
+      "x": 0.158,
+      "y": 2.64,
+      "cluster_id": 2,
+      "zone_name": "Low Susceptibility Basin",
+      "is_landslide": false,
+      "elevation": 5034.0,
+      "slope": 3.1
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.706,
+      "y": 1.42,
+      "cluster_id": 0,
+      "zone_name": "Moderate Zone 1",
+      "is_landslide": false,
+      "elevation": 4068.0,
+      "slope": 12.5
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.257,
+      "y": -0.299,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 148.0,
+      "slope": 0.6
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": -1.033,
+      "y": -0.465,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 23.0,
+      "slope": 0.6
+    },
+    {
+      "x": -1.196,
+      "y": -0.237,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": false,
+      "elevation": 266.0,
+      "slope": 0.9
+    },
+    {
+      "x": 0.616,
+      "y": -0.543,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 732.0,
+      "slope": 9.2
+    },
+    {
+      "x": -1.309,
+      "y": -0.033,
+      "cluster_id": 1,
+      "zone_name": "Moderate Zone 2",
+      "is_landslide": true,
+      "elevation": 500.0,
+      "slope": 0.0
+    },
+    {
+      "x": 1.509,
+      "y": -0.708,
+      "cluster_id": 4,
+      "zone_name": "Moderate Zone 3",
+      "is_landslide": true,
+      "elevation": 942.0,
+      "slope": 6.0
+    }
+  ]
+}

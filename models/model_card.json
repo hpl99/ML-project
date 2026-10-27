@@ -1,0 +1,204 @@
+{
+  "model_name": "URsafe Terrain Hazard Model (TunedRandomForest)",
+  "model_version": "v0.1.0",
+  "trained_at": "2026-10-27T06:59:31.623349Z",
+  "framework": "scikit-learn 1.9.1 / Python 3.13",
+  "problem_framing": "Relative Hazard Risk Score (0-100), not an absolute probability (ADR 0001)",
+  "features_used": [
+    "elevation_m",
+    "slope_deg",
+    "aspect_sin",
+    "aspect_cos",
+    "curvature",
+    "roughness",
+    "relief_m",
+    "rain_1d",
+    "rain_3d",
+    "rain_7d",
+    "rain_14d",
+    "rain_30d",
+    "rain_max_day_30d",
+    "api_30d",
+    "soil_wetness_top",
+    "soil_wetness_root_7d",
+    "distance_to_water_m",
+    "log_dist_to_water",
+    "month_sin",
+    "month_cos",
+    "region_group"
+  ],
+  "calibration": {
+    "method": "sigmoid",
+    "raw_brier": 0.1042,
+    "calibrated_brier": 0.1103
+  },
+  "bands": {
+    "Green": {
+      "min": 0,
+      "max": 25,
+      "label": "Low Risk",
+      "action": "Standard terrain safety; routine caution."
+    },
+    "Yellow": {
+      "min": 26,
+      "max": 55,
+      "label": "Moderate Risk",
+      "action": "Rolling terrain or light precipitation; stay alert."
+    },
+    "Orange": {
+      "min": 56,
+      "max": 80,
+      "label": "High Risk",
+      "action": "Elevated vulnerability; consider alternative routes."
+    },
+    "Red": {
+      "min": 81,
+      "max": 100,
+      "label": "Severe Hazard",
+      "action": "Extreme hazard; avoid travel until storm clears."
+    }
+  },
+  "orange_threshold": {
+    "probability": 0.28,
+    "score": 28,
+    "spatial_test_recall": 0.833,
+    "false_alarm_rate": 0.198
+  },
+  "performance": {
+    "spatial_holdout": {
+      "accuracy": 0.8077,
+      "precision": 0.4688,
+      "recall": 0.8333,
+      "f1": 0.6,
+      "roc_auc": 0.9115,
+      "pr_auc": 0.6705,
+      "brier_score": 0.1103,
+      "false_alarm_rate": 0.1977,
+      "confusion_matrix": {
+        "tn": 69,
+        "fp": 17,
+        "fn": 3,
+        "tp": 15
+      }
+    },
+    "models_comparison": {
+      "LogisticRegression": {
+        "accuracy": 0.8365,
+        "precision": 0.5217,
+        "recall": 0.6667,
+        "f1": 0.5854,
+        "roc_auc": 0.9348,
+        "pr_auc": 0.7236,
+        "brier_score": 0.1022,
+        "false_alarm_rate": 0.1279,
+        "confusion_matrix": {
+          "tn": 75,
+          "fp": 11,
+          "fn": 6,
+          "tp": 12
+        }
+      },
+      "DecisionTree": {
+        "accuracy": 0.7596,
+        "precision": 0.3939,
+        "recall": 0.7222,
+        "f1": 0.5098,
+        "roc_auc": 0.8046,
+        "pr_auc": 0.4451,
+        "brier_score": 0.1817,
+        "false_alarm_rate": 0.2326,
+        "confusion_matrix": {
+          "tn": 66,
+          "fp": 20,
+          "fn": 5,
+          "tp": 13
+        }
+      },
+      "BaggingClassifier": {
+        "accuracy": 0.8654,
+        "precision": 0.5909,
+        "recall": 0.7222,
+        "f1": 0.65,
+        "roc_auc": 0.8889,
+        "pr_auc": 0.6243,
+        "brier_score": 0.1084,
+        "false_alarm_rate": 0.1047,
+        "confusion_matrix": {
+          "tn": 77,
+          "fp": 9,
+          "fn": 5,
+          "tp": 13
+        }
+      },
+      "RandomForest": {
+        "accuracy": 0.8654,
+        "precision": 0.5909,
+        "recall": 0.7222,
+        "f1": 0.65,
+        "roc_auc": 0.9018,
+        "pr_auc": 0.5984,
+        "brier_score": 0.1108,
+        "false_alarm_rate": 0.1047,
+        "confusion_matrix": {
+          "tn": 77,
+          "fp": 9,
+          "fn": 5,
+          "tp": 13
+        }
+      },
+      "HistGradientBoosting": {
+        "accuracy": 0.8269,
+        "precision": 0.5,
+        "recall": 0.7222,
+        "f1": 0.5909,
+        "roc_auc": 0.8488,
+        "pr_auc": 0.605,
+        "brier_score": 0.146,
+        "false_alarm_rate": 0.1512,
+        "confusion_matrix": {
+          "tn": 73,
+          "fp": 13,
+          "fn": 5,
+          "tp": 13
+        }
+      }
+    },
+    "leakage_gap": {
+      "random_split_roc_auc": 0.8816,
+      "spatial_split_roc_auc": 0.9018,
+      "auc_leakage_delta": -0.0202,
+      "notes": "Spatial autocorrelation causes random split to overestimate performance by leaking nearby points."
+    }
+  },
+  "feature_importances": {
+    "elevation_m": 0.0365,
+    "slope_deg": 0.0302,
+    "aspect_sin": 0.0224,
+    "aspect_cos": 0.0194,
+    "curvature": 0.0285,
+    "roughness": 0.0366,
+    "relief_m": 0.0311,
+    "rain_1d": 0.0773,
+    "rain_3d": 0.0879,
+    "rain_7d": 0.0688,
+    "rain_14d": 0.0694,
+    "rain_30d": 0.0539,
+    "rain_max_day_30d": 0.0738,
+    "api_30d": 0.1004,
+    "soil_wetness_top": 0.08,
+    "soil_wetness_root_7d": 0.0473,
+    "distance_to_water_m": 0.0521,
+    "log_dist_to_water": 0.048,
+    "month_sin": 0.0161,
+    "month_cos": 0.0203,
+    "region_group_East/Southeast Asia": 0.0001,
+    "region_group_South Asia": 0.0
+  },
+  "known_weaknesses": [
+    "Conservative slope angles: 90m DEM smooths micro-cliffs and roadside cut-slopes.",
+    "Coarse atmospheric resolution: 25km reanalysis grid can miss localized cloudburst cells in isolated ravines.",
+    "Pseudo-absence sampling: Safe locations are unrecorded rather than verified stable across centuries.",
+    "Roadway reporting bias: Global landslide catalogues are concentrated along transit corridors and populated towns."
+  ],
+  "disclaimer": "Model-derived relative estimates. Never a guarantee. Check local disaster warnings."
+}
