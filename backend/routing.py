@@ -199,8 +199,8 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
     fast_idx = int(np.argmin([e["duration_min"] for e in evaluated]))
     fast_route = evaluated[fast_idx]
 
-    # 2. Safer: Lowest maximum risk along entire corridor
-    safer_idx = int(np.argmin([e["max_risk"] for e in evaluated]))
+    # 2. Safer: Lowest maximum risk along entire corridor; tie-break on mean_risk
+    safer_idx = int(np.lexsort(([e["mean_risk"] for e in evaluated], [e["max_risk"] for e in evaluated]))[0])
     safer_route = evaluated[safer_idx]
 
     # 3. Balanced: Weighted cost of duration and mean risk
@@ -220,6 +220,7 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
             "id": "fast",
             "archetype": "Fast",
             "badge": "Shortest Duration",
+            "archetype_color": "#f97316",
             "duration_min": fast_route["duration_min"],
             "distance_km": fast_route["distance_km"],
             "mean_risk": fast_route["mean_risk"],
@@ -233,6 +234,7 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
             "id": "balanced",
             "archetype": "Balanced",
             "badge": "Optimal Trade-off",
+            "archetype_color": "#0284c7",
             "duration_min": balanced_route["duration_min"],
             "distance_km": balanced_route["distance_km"],
             "mean_risk": balanced_route["mean_risk"],
@@ -246,6 +248,7 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
             "id": "safer",
             "archetype": "Safer",
             "badge": "Maximum Safety",
+            "archetype_color": "#10b981",
             "duration_min": safer_route["duration_min"],
             "distance_km": safer_route["distance_km"],
             "mean_risk": safer_route["mean_risk"],
@@ -257,10 +260,26 @@ def compare_routes(start_lat: float, start_lon: float, end_lat: float, end_lon: 
         }
     ]
 
+    from backend.live_features import fetch_current_weather, reverse_geocode
+    origin_weather = fetch_current_weather(start_lat, start_lon)
+    dest_weather = fetch_current_weather(end_lat, end_lon)
+    origin_name = reverse_geocode(start_lat, start_lon)
+    dest_name = reverse_geocode(end_lat, end_lon)
+
     out = {
         "status": "success",
         "routes_count": len(routes_out),
         "osrm_options_returned": len(osrm_routes),
+        "origin": {
+            "name": origin_name,
+            "coordinates": [start_lat, start_lon],
+            "weather": origin_weather
+        },
+        "destination": {
+            "name": dest_name,
+            "coordinates": [end_lat, end_lon],
+            "weather": dest_weather
+        },
         "note": "Routing powered by OSRM driving engine. Cumulative risk metric assumes segment hazard independence.",
         "routes": routes_out
     }

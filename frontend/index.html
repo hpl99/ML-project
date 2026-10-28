@@ -70,14 +70,43 @@
       <div class="predict-grid">
         <!-- Interactive Map Column -->
         <div class="map-container-wrapper">
+          <div class="map-toolbar">
+            <div class="map-presets-bar">
+              <span class="preset-label">Quick Locations:</span>
+              <button class="preset-chip" data-lat="30.3244" data-lon="78.0339">📍 Dehradun</button>
+              <button class="preset-chip" data-lat="30.5574" data-lon="79.5667">🏔️ Joshimath</button>
+              <button class="preset-chip" data-lat="11.605" data-lon="76.083">🌊 Wayanad</button>
+              <button class="preset-chip" data-lat="31.1048" data-lon="77.1734">🌲 Shimla</button>
+              <button class="preset-chip" data-lat="27.041" data-lon="88.2663">🌁 Darjeeling</button>
+              <button class="preset-chip" data-lat="30.4598" data-lon="78.0644">⛰️ Mussoorie</button>
+            </div>
+            <div class="map-tools-group">
+              <button id="btn-locate-me" class="map-action-btn" title="Detect my real location">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                <span>Locate Me</span>
+              </button>
+              <div class="layer-selector">
+                <select id="predict-layer-select" class="layer-dropdown" title="Change map layer style">
+                  <option value="streets">🗺️ Streets</option>
+                  <option value="topo">🏔️ Topo Terrain</option>
+                  <option value="satellite">🛰️ Satellite</option>
+                  <option value="dark">🌙 Dark Mode</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div class="map-search-bar">
             <div class="search-input-group">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input type="text" id="predict-search-input" placeholder="Search city or mountain pass (e.g. Dehradun, Wayanad)..." autocomplete="off">
+              <input type="text" id="predict-search-input" placeholder="Search city, mountain pass, or coordinates..." autocomplete="off">
             </div>
             <ul id="predict-search-results" class="search-results-dropdown"></ul>
           </div>
           <div id="predict-map" class="leaflet-map"></div>
+          <div class="map-tip-banner">
+            <span class="live-dot pulse"></span> Click anywhere on the map or select a quick location to fetch real-time atmospheric telemetry & slope hazard.
+          </div>
         </div>
 
         <!-- Controls & Results Side Panel -->
@@ -110,6 +139,15 @@
             </div>
 
             <div id="predict-card" style="display: none;">
+              <!-- Location Banner -->
+              <div class="location-hero-bar">
+                <div class="loc-pin-icon">📍</div>
+                <div class="loc-text-wrap">
+                  <div id="res-location-name" class="loc-name">Fetching place...</div>
+                  <div id="res-coords-elev" class="loc-coords">--</div>
+                </div>
+              </div>
+
               <!-- Score Box -->
               <div class="score-hero-box">
                 <div>
@@ -126,20 +164,130 @@
                 </div>
               </div>
 
-              <!-- AI Companion Advisory -->
+              <!-- Real-Time Weather Telemetry Card -->
+              <div class="weather-telemetry-box" id="predict-weather-card">
+                <div class="telemetry-header">
+                  <div class="telemetry-live-tag">
+                    <span class="live-dot pulse"></span>
+                    <span>LIVE ATMOSPHERIC TELEMETRY</span>
+                  </div>
+                  <div id="res-weather-time" class="telemetry-time">Open-Meteo Realtime</div>
+                </div>
+
+                <div class="weather-primary-row">
+                  <div id="res-weather-icon" class="weather-large-icon">☀️</div>
+                  <div class="weather-temp-wrap">
+                    <div class="weather-temp-main">
+                      <span id="res-weather-temp">--</span><span class="temp-unit">&deg;C</span>
+                    </div>
+                    <div id="res-weather-desc" class="weather-desc">Clear sky</div>
+                  </div>
+                  <div class="weather-feels">
+                    Feels like: <strong id="res-weather-apparent">--&deg;C</strong>
+                  </div>
+                </div>
+
+                <div class="weather-metrics-grid">
+                  <div class="metric-cell">
+                    <span class="metric-icon">🌧️</span>
+                    <span class="metric-label">Live Rain</span>
+                    <span id="res-weather-precip" class="metric-value">0.0 mm/h</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-icon">💧</span>
+                    <span class="metric-label">Humidity</span>
+                    <span id="res-weather-humidity" class="metric-value">--%</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-icon">💨</span>
+                    <span class="metric-label">Wind Speed</span>
+                    <span id="res-weather-wind" class="metric-value">-- km/h</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-icon">⏱️</span>
+                    <span class="metric-label">Pressure</span>
+                    <span id="res-weather-pressure" class="metric-value">-- hPa</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-icon">☁️</span>
+                    <span class="metric-label">Cloud Cover</span>
+                    <span id="res-weather-clouds" class="metric-value">--%</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-icon">⚡</span>
+                    <span class="metric-label">Gusts</span>
+                    <span id="res-weather-gusts" class="metric-value">-- km/h</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hydrometeorological Saturation & Slope Stability Breakdown -->
+              <div class="gauges-breakdown-card">
+                <div class="block-title" style="margin-bottom: 12px;">Hydrometeorological & Slope Stability</div>
+                
+                <!-- Soil Saturation Progress Bar -->
+                <div class="gauge-row">
+                  <div class="gauge-labels">
+                    <span>Soil Moisture Saturation</span>
+                    <strong id="res-soil-saturation-val">--%</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div id="res-soil-saturation-bar" class="progress-fill fill-green" style="width: 20%;"></div>
+                  </div>
+                  <div id="res-soil-saturation-label" class="gauge-sublabel">Moderate Saturation</div>
+                </div>
+
+                <!-- Slope Gradient Meter -->
+                <div class="gauge-row" style="margin-top: 14px;">
+                  <div class="gauge-labels">
+                    <span>Slope Gradient & Relief</span>
+                    <strong id="res-slope-gradient-val">--&deg;</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div id="res-slope-gradient-bar" class="progress-fill fill-yellow" style="width: 30%;"></div>
+                  </div>
+                  <div id="res-slope-gradient-label" class="gauge-sublabel">Moderate Hill Slope</div>
+                </div>
+
+                <div class="gauge-details-strip">
+                  <div>Water Distance: <strong id="res-water-dist">-- m</strong></div>
+                  <div>30-Day API: <strong id="res-api-val">-- mm</strong></div>
+                </div>
+              </div>
+
+              <!-- AI Companion Advisory with Audio -->
               <div class="companion-box">
                 <div class="companion-header">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
-                  <span>AI Companion Guidance</span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                    <span>AI Companion Guidance</span>
+                  </div>
+                  <div class="companion-actions">
+                    <button id="btn-voice-guidance" class="btn-audio-speak" title="Listen to AI Companion guidance aloud">
+                      <span id="voice-icon">🔊</span>
+                      <span id="voice-text">Listen</span>
+                    </button>
+                    <button id="btn-copy-advice" class="btn-copy-text" title="Copy advisory to clipboard">
+                      <span>📋</span>
+                    </button>
+                  </div>
+                </div>
+                <div id="companion-audio-waveform" class="audio-waveform" style="display: none;">
+                  <span></span><span></span><span></span><span></span><span></span>
                 </div>
                 <div id="res-companion-text" class="companion-text"></div>
+                <div class="companion-footer-actions">
+                  <button id="btn-open-emergency" class="btn-emergency-action">
+                    <span>🚨 Emergency Assistance & SOS Quick-Dial</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Terrain Zone -->
               <div class="controls-block">
                 <div class="block-title">Terrain Morphology Zone</div>
                 <div id="res-zone-name" style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">--</div>
-                <div id="res-zone-memberships" style="display: flex; gap: 6px; font-size: 11px; color: var(--color-muted-text);"></div>
+                <div id="res-zone-memberships" style="display: flex; gap: 6px; font-size: 11px; color: var(--color-muted-text); flex-wrap: wrap;"></div>
               </div>
 
               <!-- Top Physical Drivers (SHAP) -->
@@ -179,16 +327,68 @@
       <div class="route-grid">
         <!-- Route Map Column -->
         <div class="map-container-wrapper">
+          <div class="map-toolbar">
+            <div class="map-presets-bar">
+              <span class="preset-label">Preset Corridors:</span>
+              <button class="route-preset-btn" data-start="Rishikesh" data-end="Joshimath" data-start-coord="30.0869,78.2676" data-end-coord="30.5574,79.5667">🚗 Rishikesh → Joshimath</button>
+              <button class="route-preset-btn" data-start="Dehradun" data-end="Mussoorie" data-start-coord="30.3244,78.0339" data-end-coord="30.4598,78.0644">⛰️ Dehradun → Mussoorie</button>
+              <button class="route-preset-btn" data-start="Kalka" data-end="Shimla" data-start-coord="30.8364,76.9366" data-end-coord="31.1048,77.1734">🌲 Kalka → Shimla</button>
+            </div>
+            <div class="map-tools-group">
+              <button id="btn-pick-endpoints-map" class="map-action-btn" title="Click on the map to set origin & destination">
+                <span>📍 Click Map to Pick</span>
+              </button>
+              <div class="layer-selector">
+                <select id="route-layer-select" class="layer-dropdown" title="Change map layer style">
+                  <option value="streets">🗺️ Streets</option>
+                  <option value="topo">🏔️ Topo Terrain</option>
+                  <option value="satellite">🛰️ Satellite</option>
+                  <option value="dark">🌙 Dark Mode</option>
+                </select>
+              </div>
+              <button id="btn-clear-route" class="map-action-btn btn-secondary-small" title="Clear current routes from map">
+                <span>✕ Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="route-map-instruction" class="route-map-instruction" style="display: none;">
+            <span id="route-instruction-text">Click on the map to place the <strong>Origin (Start)</strong> pin...</span>
+            <button id="btn-cancel-route-pick" class="btn-close-banner">✕</button>
+          </div>
+
           <div id="route-map" class="leaflet-map"></div>
+
+          <!-- Route Weather Telemetry Bar -->
+          <div id="route-endpoints-weather-bar" class="route-endpoints-weather-bar" style="display: none;">
+            <div class="endpoint-weather-col">
+              <span class="endpoint-badge badge-origin">A (Origin)</span>
+              <strong id="route-origin-name">--</strong>
+              <span id="route-origin-weather" class="endpoint-weather-sub">--</span>
+            </div>
+            <div class="endpoint-arrow-col">➔</div>
+            <div class="endpoint-weather-col">
+              <span class="endpoint-badge badge-dest">B (Destination)</span>
+              <strong id="route-dest-name">--</strong>
+              <span id="route-dest-weather" class="endpoint-weather-sub">--</span>
+            </div>
+          </div>
         </div>
 
         <!-- Route Controls and Cards Panel -->
         <div class="route-panel card-panel">
           <div class="controls-block">
             <div class="block-title">Select Route Endpoints</div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <input type="text" id="route-start-input" class="date-input" placeholder="Origin (Click map or type city)..." value="Rishikesh">
-              <input type="text" id="route-end-input" class="date-input" placeholder="Destination (Click map or type city)..." value="Joshimath">
+            <div class="route-inputs-container">
+              <div class="route-input-group">
+                <span class="route-pin-badge origin-badge">A</span>
+                <input type="text" id="route-start-input" class="date-input route-endpoint-input" placeholder="Origin city or place..." value="Rishikesh">
+              </div>
+              <button id="btn-swap-endpoints" class="btn-swap-endpoints" title="Swap origin and destination">⇅</button>
+              <div class="route-input-group">
+                <span class="route-pin-badge dest-badge">B</span>
+                <input type="text" id="route-end-input" class="date-input route-endpoint-input" placeholder="Destination city or place..." value="Joshimath">
+              </div>
             </div>
           </div>
 
@@ -202,15 +402,48 @@
             </div>
           </div>
 
+          <div class="controls-block">
+            <div class="block-title">Route Display Styling</div>
+            <div class="route-style-toggle-group">
+              <label class="radio-label">
+                <input type="radio" name="route-view-mode" value="single" checked>
+                <span>Active Route Only (Clean)</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="route-view-mode" value="all">
+                <span>Overlay Alternatives</span>
+              </label>
+            </div>
+          </div>
+
           <button id="btn-compare-routes" class="btn-pill" style="width: 100%; padding: 14px 20px;">
             <span>Compare Routes</span>
           </button>
 
           <div id="route-loading" style="display: none; text-align: center; padding: 24px;">
-            <p>Evaluating topography & weather across route waypoints...</p>
+            <div class="spinner-dot"></div>
+            <p style="margin-top: 10px;">Evaluating topography & weather across route waypoints...</p>
           </div>
 
           <div id="route-cards-list" class="route-cards-list"></div>
+
+          <!-- Elevation & Hazard Profile Chart -->
+          <div id="route-chart-container" class="controls-block" style="display: none; margin-top: 20px;">
+            <div class="block-title">Elevation & Hazard Gradient Profile</div>
+            <div style="height: 160px; position: relative;">
+              <canvas id="route-elevation-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Segment Breakdown Accordion -->
+          <div id="route-breakdown-container" class="controls-block" style="display: none; margin-top: 16px;">
+            <div class="accordion-header" id="btn-toggle-segments">
+              <span class="block-title" style="margin: 0;">2 km Waypoint Segment Breakdown</span>
+              <span id="accordion-arrow">▼</span>
+            </div>
+            <div id="route-segments-table" class="accordion-content" style="display: none;"></div>
+          </div>
+
           <div style="font-size: 11px; color: var(--color-muted-text); margin-top: 16px;">
             *Routes fetched from OSRM driving engine. Cumulative risk assumes waypoint hazard independence.
           </div>
@@ -336,9 +569,56 @@
     <div class="official-links">
       <a href="https://www.gsi.gov.in" target="_blank" rel="noopener">Geological Survey of India (GSI)</a>
       <a href="https://ndma.gov.in" target="_blank" rel="noopener">National Disaster Management Authority (NDMA)</a>
-      <a href="https://mausam.imd.gov.in" target="_blank" rel="noopener">India Meteorological Department (IMD)</a>
+  <!-- Emergency SOS Quick Action Modal -->
+  <div id="emergency-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 22px;">🚨</span>
+          <h3>Emergency Assistance & Public Helplines</h3>
+        </div>
+        <button id="btn-close-emergency" class="btn-modal-close">✕</button>
+      </div>
+      <p style="font-size: 14px; margin-bottom: 20px;">If you are in immediate danger of a landslide, flash flood, or slope collapse, contact emergency services immediately:</p>
+      
+      <div class="emergency-contacts-list">
+        <a href="tel:112" class="emergency-contact-card">
+          <div class="contact-num">112</div>
+          <div class="contact-info">
+            <strong>National All-in-One Emergency Response</strong>
+            <span>Police, Fire, Ambulance & Mountain Rescue across India</span>
+          </div>
+          <span class="call-badge">Dial 📞</span>
+        </a>
+
+        <a href="tel:1070" class="emergency-contact-card">
+          <div class="contact-num">1070</div>
+          <div class="contact-info">
+            <strong>State Disaster Management Authority (SDMA)</strong>
+            <span>State-level disaster control & evacuation coordination</span>
+          </div>
+          <span class="call-badge">Dial 📞</span>
+        </a>
+
+        <a href="tel:1077" class="emergency-contact-card">
+          <div class="contact-num">1077</div>
+          <div class="contact-info">
+            <strong>District Disaster Control Room (DDMA)</strong>
+            <span>Local mountain pass emergency support & transit closures</span>
+          </div>
+          <span class="call-badge">Dial 📞</span>
+        </a>
+      </div>
+
+      <div class="emergency-external-links">
+        <a href="https://mausam.imd.gov.in" target="_blank" rel="noopener">🌧️ Check IMD Nowcast Warnings</a>
+        <a href="https://ndma.gov.in" target="_blank" rel="noopener">⚠️ NDMA Disaster Guidelines</a>
+      </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="app-toast" class="app-toast" style="display: none;"></div>
 
   <!-- Leaflet JS & App Script -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

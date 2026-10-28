@@ -135,6 +135,15 @@ def geocode_place(q: str = Query(..., min_length=2, description="Place or city n
     return []
 
 
+@app.get("/api/reverse-geocode")
+def reverse_geocode_coords(lat: float = Query(..., ge=-90, le=90), lon: float = Query(..., ge=-180, le=180)) -> Dict[str, Any]:
+    """Reverse geocode coordinates to human readable place name."""
+    from backend.live_features import reverse_geocode
+    place = reverse_geocode(lat, lon)
+    return {"place_name": place, "lat": lat, "lon": lon}
+
+
+
 # -----------------------------------------------------------------------------
 # Static Mounts (ADR, Reports, Frontend)
 # -----------------------------------------------------------------------------

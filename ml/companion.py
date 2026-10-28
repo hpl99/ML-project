@@ -45,7 +45,9 @@ def ai_companion_guide(
     profile: str = "hiker",
     raw_probability: float = None,
     shap_contributions: Dict[str, float] = None,
-    terrain_zone: Dict[str, Any] = None
+    terrain_zone: Dict[str, Any] = None,
+    live_weather: Dict[str, Any] = None,
+    location_name: str = None
 ) -> Dict[str, Any]:
     """Universal AI Companion guide callable by both the FastAPI backend and Jupyter notebooks.
 
@@ -61,6 +63,10 @@ def ai_companion_guide(
         Feature-level SHAP values.
     terrain_zone : Dict[str, Any], optional
         Terrain classification zone and soft GMM membership probabilities.
+    live_weather : Dict[str, Any], optional
+        Real-time current meteorological observations from Open-Meteo.
+    location_name : str, optional
+        Reverse-geocoded place or landmark name.
     """
     # 1. Base Score Calculation
     if raw_probability is not None:
@@ -105,28 +111,46 @@ def ai_companion_guide(
     rain_3d_val = terrain_sample.get("rain_3d", 0.0)
     elev_val = terrain_sample.get("elevation_m", 0.0)
 
+    # Live atmospheric telemetry synthesis
+    loc_prefix = f"At {location_name} (elev. {elev_val:.0f}m): " if location_name else f"At elevation {elev_val:.0f}m: "
+    weather_snippet = ""
+    if live_weather:
+        w_desc = live_weather.get("weather_description", "Fair")
+        w_temp = live_weather.get("temperature_c", 20.0)
+        w_precip = live_weather.get("precipitation_mm", 0.0)
+        w_wind = live_weather.get("wind_speed_kmh", 0.0)
+        w_hum = live_weather.get("relative_humidity_pct", 50)
+        if w_precip > 0.5:
+            weather_snippet = f"Current condition: {w_desc} ({w_temp:.1f}°C, {w_precip:.1f} mm/h live rain, {w_wind:.1f} km/h wind, {w_hum}% humidity). Active precipitation is rapidly saturating regolith. "
+        else:
+            weather_snippet = f"Current condition: {w_desc} ({w_temp:.1f}°C, calm/moderate wind {w_wind:.1f} km/h, {w_hum}% humidity) with no active cloudburst. "
+
     if adjusted_score >= 80:
         advice_text = (
             f"URGENT: Severe landslide hazard detected (Score {adjusted_score}, {band['name']}). "
-            f"Steep mountain incline ({slope_val:.1f}°) combined with intense recent rainfall ({rain_3d_val:.1f} mm) "
+            f"{loc_prefix}{weather_snippet}"
+            f"Steep mountain incline ({slope_val:.1f}°) combined with hydrometeorological saturation ({rain_3d_val:.1f} mm recent rain) "
             f"creates high probability of active debris flow or translational slope failure. "
             f"AI Companion Advice: Immediate avoidance recommended. Seek valley bypass or shelter away from slope toes until rain ceases."
         )
     elif adjusted_score >= 55:
         advice_text = (
             f"WARNING: High terrain vulnerability (Score {adjusted_score}, {band['name']}). "
+            f"{loc_prefix}{weather_snippet}"
             f"Rainfall accumulation ({rain_3d_val:.1f} mm) is destabilizing mountain regolith on this {slope_val:.1f}° slope. "
             f"AI Companion Advice: For {profile_clean.title()} travelers, proceed with heightened vigilance or reroute along a flatter ridge corridor."
         )
     elif adjusted_score >= 25:
         advice_text = (
             f"ADVISORY: Moderate susceptibility (Score {adjusted_score}, {band['name']}). "
-            f"Terrain conditions are currently stable, but watch for localized roadside rockfalls if rain accelerates. "
+            f"{loc_prefix}{weather_snippet}"
+            f"Terrain conditions are currently stable, but watch for localized roadside rockfalls if rain accelerates on the {slope_val:.1f}° gradient. "
             f"AI Companion Advice: Maintain normal precautions; monitor official meteorological bulletins."
         )
     else:
         advice_text = (
             f"NOTICE: Ground stability is favorable (Score {adjusted_score}, {band['name']}). "
+            f"{loc_prefix}{weather_snippet}"
             f"Gentle terrain ({slope_val:.1f}°) and light rainfall ({rain_3d_val:.1f} mm) present low hazard risk. "
             f"AI Companion Advice: Ideal travel conditions along this section."
         )

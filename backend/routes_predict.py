@@ -13,7 +13,7 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-from backend.live_features import get_live_features
+from backend.live_features import get_live_features, get_realtime_location_status, fetch_current_weather, reverse_geocode
 from ml.companion import ai_companion_guide
 from ml.config import MODELS_DIR, CONTINUOUS_TERRAIN_FEATURES, RISK_BANDS
 from ml.explain import compute_sample_attributions
@@ -51,12 +51,27 @@ class PredictRequest(BaseModel):
     date: Optional[str] = Field(None, description="Optional ISO date YYYY-MM-DD (defaults to current date)")
 
 
+@router.get("/status")
+def get_location_status_telemetry(lat: float, lon: float) -> Dict[str, Any]:
+    """Retrieve instant real-time weather and terrain status without running full ML pipeline."""
+    try:
+        return get_realtime_location_status(lat, lon)
+    except Exception as e:
+        logger.exception("Status telemetry endpoint failed")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.post("/predict")
 def predict_hazard(req: PredictRequest) -> Dict[str, Any]:
     """Execute real-time terrain hazard prediction and companion guidance."""
     try:
-        # 1. Fetch multi-source features and provenance
+        # 1. Fetch multi-source features, provenance, real-time weather & location
         features, rain_chart, provenance = get_live_features(req.lat, req.lon, req.date)
+        status_telemetry = get_realtime_location_status(req.lat, req.lon)
+        live_weather = status_telemetry["weather"]
+        location_name = status_telemetry["location_name"]
+        hydrology = status_telemetry["hydrology"]
+        terrain_stability = status_telemetry["terrain"]
 
         # 2. Predict calibrated relative risk
         calibrator, gmm, scaler, zone_map = get_models()
@@ -100,13 +115,15 @@ def predict_hazard(req: PredictRequest) -> Dict[str, Any]:
         # 4. SHAP Feature Contributions
         shap_dict = compute_sample_attributions(df_row)
 
-        # 5. Universal AI Companion Guidance
+        # 5. Universal AI Companion Guidance with real-time weather & location
         companion_payload = ai_companion_guide(
             terrain_sample=features,
             profile=req.profile,
             raw_probability=prob,
             shap_contributions=shap_dict,
-            terrain_zone=zone_info
+            terrain_zone=zone_info,
+            live_weather=live_weather,
+            location_name=location_name
         )
 
         return {
@@ -114,7 +131,11 @@ def predict_hazard(req: PredictRequest) -> Dict[str, Any]:
             "model_version": "v0.1.0",
             "generated_at": datetime.utcnow().isoformat() + "Z",
             "coordinates": {"lat": round(req.lat, 5), "lon": round(req.lon, 5)},
+            "location_name": location_name,
             "date": req.date or datetime.utcnow().strftime("%Y-%m-%d"),
+            "current_weather": live_weather,
+            "hydrology_status": hydrology,
+            "terrain_stability": terrain_stability,
             "features": features,
             "feature_provenance": provenance,
             "rainfall_chart": rain_chart,
